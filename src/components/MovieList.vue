@@ -1,10 +1,34 @@
 <template>
-  <div id="movie-container">Movie list</div>
+  <div id="movie-container">Movie list
+
+	<ul>
+		<li style="color: white;" v-for="(movie, index) in movies" :key="movie.id">
+			Index:{{ index }} {{ movie.name }}
+		</li>
+	</ul>
+  </div>
 </template>
 
 <script>
 export default {
-
+	data() {
+		return {
+			movies: [
+				{
+					id: 1,
+					name: 'movie-1'
+				}, 
+				{
+					id: 2,
+					name: 'movie-2'
+				},
+				{
+					id: 3,
+					name: 'movie-3'
+				},
+			]
+		}
+	}
 }
 </script>
 
