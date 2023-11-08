@@ -1,6 +1,6 @@
 <template>
   <div class="movie">
-    <img :src="movie.poster" alt="Movie poster">
+    <img :src="movie.poster" alt="Movie poster" @click="openDetails">
     <div class="description">
         <div class="basic-info">
             <h3>{{ movie.name }}</h3>
@@ -28,6 +28,12 @@ export default {
 
             return '#e10505';
         },
+		openDetails() {
+			this.$router.push({
+				name: 'moviePreview', 
+				params: { id: this.movie.id },
+			});
+		}
     },
 };
 </script>
