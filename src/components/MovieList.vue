@@ -1,5 +1,5 @@
 <template>
-  <div id="movie-container">Movie list
+  <div id="movie-container">
 
 	<movie v-for="movie in movies" :key="movie.id" :movie="movie" />
   </div>
