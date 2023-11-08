@@ -12,7 +12,12 @@
                 <h1>{{ movie.name }}</h1>
                 <h3>{{ movie.year }}</h3>
                 <h3>{{ movie.genre }}</h3>
-                <h3><span :style="{'background-color': getRatingColor()}">{{ movie.rating }}</span></h3>
+                <h3>
+                    <span 
+                    id="movie-rating" 
+                    :style="{'background-color': getRatingColor()}">
+                    {{ movie.rating }}
+                </span></h3>
                 <h3>Budget: {{ movie.budget }}</h3>
                 <h3>Box office: {{ movie.boxOffice }}</h3>
                 <h3>Actors:
@@ -34,8 +39,10 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue';
+import ratingMixin from '../mixins/getRatingColor'
 
 export default {
+    mixins: [ratingMixin],
   components: { Navbar },
     compponents: {
         Navbar,
@@ -49,18 +56,8 @@ export default {
     data() {
         movie: {}
     },
-    methods: {
-        getRatingColor() {
-            if(this.movie.rating > 7) return '#5eb85e';
-
-            if(this.movie.rating > 4) return '#ffa809';
-
-            return '#e10505';
-        },
-    },
     created() {
         // call from store
-        console.log("ID:", typeof this.id)
         this.movie = this.$store.getters.getMovieById(parseInt(this.id));
     }
 };
