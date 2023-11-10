@@ -59,8 +59,13 @@ const actions = {
     },
 
     addMovie({commit, state}, movie) {
-        movie.id = state.movies.length + 1
-        commit(ADD_MOVIE, movie)
+
+        moviesApi.addMovie(movie)
+            .then(res => commit(ADD_MOVIE, res))
+            .catch(err => console.log(err));
+
+        // movie.id = state.movies.length + 1
+        // commit(ADD_MOVIE, movie)
     },
 
     deleteMovie({commit}, id) {
@@ -80,7 +85,7 @@ const getters = {
         .sort(compare(state.filter))
     },
     getMovieById: state => id => {
-        return state.movies.find(movie => movie.id === id)
+        return state.movies.find(movie => movie.id === id);
     },
 };
 

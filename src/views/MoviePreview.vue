@@ -134,6 +134,7 @@
 	import Navbar from "../components/Navbar.vue";
 	import ratingMixin from "../mixins/getRatingColor";
 	import Modal from "../components/modal.vue";
+	import moviesApi from "../services/moviesApi"
 
 	export default {
 		mixins: [ratingMixin],
