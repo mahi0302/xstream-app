@@ -1,5 +1,5 @@
 import db from "./firebase";
-import { collection, getDocs, addDoc, getDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 const moviesRef = collection(db, 'movies');
 
@@ -28,12 +28,12 @@ const moviesApi = {
         return { ...document.data(), id };
     },
 
-    updateMovie: async => {
-
+    updateMovie: async (formId, formData) => {
+        return await updateDoc(doc(db, 'movies', formId), formData);
     },
-
-    deleteMovie: async() => {
-
+    
+    deleteMovie: async (id) => {
+        return await deleteDoc(doc(db, 'movies', id));
     },
 }
 

@@ -34,14 +34,9 @@ const mutations = {
         state.movies.slice(state.movies.findIndex(movie => movie.id === id), 1)
     },
 
-    [UPDATE_MOVIE](state, movie) {
-        state.movies = state.movies.map(oldMovie => {
-            if(movie.id === oldMovie) {
-                return movie
-            }
-
-            return oldMovie
-        })
+    [UPDATE_MOVIE](state, updatedMovie) {
+        state.movies = state.movies.map(movie => 
+            (movie.id === updatedMovie.id ? updatedMovie : movie));
     },
 
     [SET_MOVIES](state, movies) {
@@ -69,7 +64,18 @@ const actions = {
     },
 
     deleteMovie({commit}, id) {
-        commit(DELETE_MOVIE, id)
+        moviesApi.deleteMovie(id)
+            .then(res => {
+                commit(DELETE_MOVIE, res)
+                return
+            })
+            .catch(err => console.log(err));
+    },
+
+    updateMovie({ commit }, movie) {
+        moviesApi.updateMovie(movie.id, movie)
+            .then(res => commit(UPDATE_MOVIE, res))
+            .catch(err => console.log(err));
     },
 
     fetchMovies({ commit }) {
