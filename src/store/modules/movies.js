@@ -65,7 +65,13 @@ const actions = {
 
     deleteMovie({commit}, id) {
         commit(DELETE_MOVIE, id)
-    }
+    },
+
+    fetchMovies({ commit }) {
+        moviesApi.getMovies()
+            .then(res => commit(SET_MOVIES, res))
+            .catch(err => console.log(err));
+    },
 }
 
 const getters = {
@@ -76,12 +82,6 @@ const getters = {
     getMovieById: state => id => {
         return state.movies.find(movie => movie.id === id)
     },
-
-    fetchMovies({commit}) {
-        moviesApi.getMovies()
-        .then(res => commit(SET_MOVIES, res))
-        .catch(err => console.log(err))
-    }
 };
 
 const compare = ({ key, order }) => {

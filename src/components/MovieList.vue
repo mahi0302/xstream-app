@@ -22,9 +22,9 @@ export default {
 			return this.$store.getters.getMovies
 		}
 	},
-	// created() {
-	// 	this.movies = this.$store.getters.getMovies
-	// }
+	created() {
+		this.$store.dispatch('fetchMovies')
+	}
 }
 </script>
 
